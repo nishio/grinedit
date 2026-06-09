@@ -30,3 +30,15 @@ JAIST の SourceForge.jp ミラーから `grinedit-bin-rev194-20070115173728.zip
 ## [2026-06-09 23:59] lint | rev194 追加後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 00:03] publish | GitHub public repo 作成
+
+`nishio/grinedit` を public GitHub repository として作成し、初回コミット `0e679e5` (`Restore GRINEdit alpha0.10 sources and wiki`) を `main` に push。
+
+- URL: <https://github.com/nishio/grinedit>
+- 公開対象: 一次資料 zip、展開済み alpha0.10 ソース、復元スクリプト、wiki、README
+- 除外対象: `build/`, `lib/`, `raw/`, `alpha0.10-src/cachedir/`
+
+## [2026-06-10 00:04] lint | publish 反映後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
