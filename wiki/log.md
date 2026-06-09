@@ -80,3 +80,24 @@ Java/SWT 版延命を中止した判断に従い、TypeScript + Web を一次移
 ## [2026-06-10 01:12] lint | TypeScript + Web MVP 実装後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 01:25] filing-back | sqr10 sample と drag pin UX を追記
+
+[TypeScript + Web MVP](analyses/typescript-web-mvp.md) に、`rev194-recovered-src/sampleData/legacy/sqr10.txt` を square grid fixture として Web へ移植する方針を追記。
+
+- `MO_MoveVertex` はドラッグ中に `PL_Anchor` target を更新し、Shift なしで release すると anchor を残す
+- Web 版でもドラッグした頂点はデフォルトで pin 留めし、Shift release で pin 解除する
+
+## [2026-06-10 01:32] implementation | sqr10 sample と drag pin UX を実装
+
+`web/` に `sqr10` fixture と pinned vertex の最小実装を追加。
+
+- `rev194-recovered-src/sampleData/legacy/sqr10.txt` から 100 vertices / 180 edges の `web/src/fixtures/sqr10.yaml` を生成
+- `Vertex.pinned` を追加し、`anchored` params を pinned vertex として import
+- layout step は pinned vertex の位置を固定
+- Canvas drag は移動開始時に vertex を pin 留めし、Shift release で pin 解除
+- Browser で `sqr10` load と drag 後の Pinned count 反映を確認
+
+## [2026-06-10 01:33] lint | sqr10 sample と drag pin UX 実装後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。

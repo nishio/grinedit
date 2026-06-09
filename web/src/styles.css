@@ -125,7 +125,7 @@ button:hover {
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin: 0;
 }
@@ -195,5 +195,9 @@ button:hover {
   .inspector {
     border-left: 0;
     border-top: 1px solid #cfd6d0;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

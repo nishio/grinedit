@@ -20,6 +20,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         <select id="fixture">
           <option value="small">small</option>
           <option value="small2">small2</option>
+          <option value="sqr10">sqr10</option>
           <option value="testBasicStrokeEdge">BasicStrokeEdge</option>
         </select>
       </label>
@@ -40,6 +41,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
             <div><dt>Vertices</dt><dd id="vertexCount">0</dd></div>
             <div><dt>Edges</dt><dd id="edgeCount">0</dd></div>
             <div><dt>Laws</dt><dd id="lawCount">0</dd></div>
+            <div><dt>Pinned</dt><dd id="pinnedCount">0</dd></div>
           </dl>
         </section>
         <section class="panel">
@@ -130,6 +132,7 @@ function render(): void {
   text("#vertexCount", String(summary.vertices));
   text("#edgeCount", String(summary.edges));
   text("#lawCount", String(summary.laws));
+  text("#pinnedCount", String(summary.pinned));
   const selected = selectedId ? gateway.graph.all.get(selectedId) : undefined;
   text("#selectedDetails", selected ? JSON.stringify(selected.params, null, 2) : "none");
   document.querySelector<HTMLTextAreaElement>("#yamlPreview")!.value = exportYamlGraph(gateway.graph);

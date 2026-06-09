@@ -57,6 +57,7 @@ sources:
 - Canvas で graph を表示する。
 - fixture 選択、sample load、layout step/run/pause、selection 表示、YAML text preview を持つ。
 - 最初の編集操作は drag vertex と add vertex/edge まででよい。
+- `MO_MoveVertex` はドラッグ中に `PL_Anchor` の target を更新し、Shift なしで mouse up した場合はその場に anchor を残すため、Web UI でもドラッグした頂点はデフォルトで pin 留めする。Shift を押して離した場合は pin を解除する（[rev194-recovered-src](../sources/rev194-recovered-src.md)より）。
 - Jython console、plugin menu、SWT/JFace menu 再現は MVP 外。
 
 ## Tests
@@ -67,6 +68,7 @@ sources:
   - `small.txt`: 4 vertices / 3 edges
   - `small2.txt`: `CircleVertex`, `TriangleEdge` の `{classname, params}` を読む
   - `testBasicStrokeEdge.txt`: `BasicStrokeEdge.width` を読む
+  - `sqr10.txt`: legacy 形式の 10x10 square grid を YAML fixture に変換して読む
 - Graph/command
   - `addVertex`, `addEdge`, `modVertex`, `delEdge`
   - named dictionaries と `All` の同期
@@ -104,3 +106,7 @@ sources:
 ### 2026-06-10
 
 `web/` に Vite + TypeScript + Vitest の初期実装を追加した。MVP 範囲として graph model、command layer、rev194 YAML fixture import/export、deterministic layout step、Canvas UI を実装し、Electron packaging は後段判断のまま残した。
+
+`rev194-recovered-src/sampleData/legacy/sqr10.txt` は 10x10 の square grid サンプルとして Web fixture 化する。rev194 の `MO_MoveVertex` はドラッグした頂点を `PL_Anchor` target に入れ、Shift なしで release すると anchor を残すため、Web 版でもドラッグ後の pin 留めをデフォルト UX とする。
+
+`web/src/fixtures/sqr10.yaml` として 100 vertices / 180 edges の 10x10 grid を追加した。Web 版は `Vertex.pinned` を持ち、layout step は pinned vertex を動かさない。Canvas ではドラッグが始まった頂点を pin 留めし、Shift を押したまま release した場合は pin を解除する。

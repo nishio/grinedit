@@ -12,6 +12,7 @@ export interface Vertex {
   y: number;
   vx: number;
   vy: number;
+  pinned: boolean;
   selected: boolean;
   params: Params;
 }
@@ -44,5 +45,6 @@ export interface GraphSummary {
   vertices: number;
   edges: number;
   laws: number;
+  pinned: number;
   all: number;
 }

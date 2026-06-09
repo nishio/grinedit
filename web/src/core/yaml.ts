@@ -78,9 +78,14 @@ export function exportYamlGraph(graph: GraphModel): string {
   const laws = root.Law as Record<string, SerializedObject>;
 
   for (const vertex of graph.vertices.values()) {
+    graph.syncVertexParams(vertex);
+    const params: Params = { ...vertex.params, label: vertex.label, x: vertex.x, y: vertex.y };
+    if (!vertex.pinned) {
+      delete params.pinned;
+    }
     vertices[vertex.id] = {
       classname: vertex.classname,
-      params: { ...vertex.params, label: vertex.label, x: vertex.x, y: vertex.y }
+      params
     };
   }
   for (const edge of graph.edges.values()) {

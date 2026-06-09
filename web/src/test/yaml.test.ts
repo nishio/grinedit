@@ -22,6 +22,13 @@ describe("rev194 YAML fixtures", () => {
     expect(graph.edges.get("e3")).toMatchObject({ classname: "BasicStrokeEdge", width: 1.1 });
   });
 
+  it("imports the sqr10 square-grid fixture", () => {
+    const graph = importYamlGraph(fixtures.sqr10);
+    expect(graph.summary()).toMatchObject({ vertices: 100, edges: 180, laws: 3 });
+    expect(graph.vertices.get("v1")).toMatchObject({ label: "1", x: -216, y: -216 });
+    expect(graph.vertices.get("v100")).toMatchObject({ label: "100", x: 216, y: 216 });
+  });
+
   it("round-trips a normalized export", () => {
     const graph = importYamlGraph(fixtures.small2);
     const exported = exportYamlGraph(graph);
@@ -29,5 +36,15 @@ describe("rev194 YAML fixtures", () => {
     expect(imported.summary()).toEqual(graph.summary());
     expect(imported.vertices.get("v4")?.classname).toBe("CircleVertex");
     expect(imported.edges.get("e2")?.classname).toBe("TriangleEdge");
+  });
+
+  it("imports anchored vertices as pinned", () => {
+    const graph = importYamlGraph(`
+Vertex:
+  v1: {label: A, anchored: [12, 34]}
+Edge: {}
+`);
+    expect(graph.vertices.get("v1")).toMatchObject({ pinned: true, x: 12, y: 34 });
+    expect(exportYamlGraph(graph)).toContain("pinned: true");
   });
 });

@@ -66,12 +66,17 @@ export function layoutStep(graph: GraphModel, options: Partial<LayoutOptions> = 
   }
 
   for (const vertex of graph.vertices.values()) {
+    if (vertex.pinned) {
+      vertex.vx = 0;
+      vertex.vy = 0;
+      graph.syncVertexParams(vertex);
+      continue;
+    }
     const force = forces.get(vertex.id)!;
     vertex.vx = (vertex.vx + force.x * opts.timeStep) * opts.damping;
     vertex.vy = (vertex.vy + force.y * opts.timeStep) * opts.damping;
     vertex.x += vertex.vx * opts.timeStep;
     vertex.y += vertex.vy * opts.timeStep;
-    vertex.params.x = vertex.x;
-    vertex.params.y = vertex.y;
+    graph.syncVertexParams(vertex);
   }
 }

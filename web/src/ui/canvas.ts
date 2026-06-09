@@ -9,12 +9,15 @@ interface CanvasPoint {
 const VERTEX_FILL = "#7ec27d";
 const VERTEX_FRAME = "#1e3324";
 const SELECTED_FILL = "#f2b84b";
+const PINNED_FRAME = "#344e9a";
 const EDGE_COLOR = "#2c3138";
 const SELECTED_EDGE = "#d8513f";
 
 export class CanvasView {
   private graph?: GraphModel;
   private dragging?: Vertex;
+  private dragStart?: CanvasPoint;
+  private didDrag = false;
   private scale = 1;
   private origin: CanvasPoint = { x: 0, y: 0 };
 
@@ -25,8 +28,8 @@ export class CanvasView {
   ) {
     this.canvas.addEventListener("pointerdown", (event) => this.pointerDown(event));
     this.canvas.addEventListener("pointermove", (event) => this.pointerMove(event));
-    this.canvas.addEventListener("pointerup", () => this.pointerUp());
-    this.canvas.addEventListener("pointerleave", () => this.pointerUp());
+    this.canvas.addEventListener("pointerup", (event) => this.pointerUp(event));
+    this.canvas.addEventListener("pointerleave", (event) => this.pointerUp(event));
   }
 
   setGraph(graph: GraphModel): void {
@@ -124,8 +127,8 @@ export class CanvasView {
     const width = Math.max(34, ctx.measureText(label).width + 18);
     const height = 28;
     ctx.fillStyle = vertex.selected ? SELECTED_FILL : VERTEX_FILL;
-    ctx.strokeStyle = VERTEX_FRAME;
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = vertex.pinned ? PINNED_FRAME : VERTEX_FRAME;
+    ctx.lineWidth = vertex.pinned ? 2.5 : 1.5;
     if (vertex.classname === "CircleVertex") {
       const radius = Math.max(width, height) / 2;
       ctx.beginPath();
@@ -141,6 +144,18 @@ export class CanvasView {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(label, vertex.x, vertex.y);
+    if (vertex.pinned) {
+      this.drawPinMark(ctx, vertex.x + width / 2 - 3, vertex.y - height / 2 + 3);
+    }
+  }
+
+  private drawPinMark(ctx: CanvasRenderingContext2D, x: number, y: number): void {
+    ctx.save();
+    ctx.fillStyle = PINNED_FRAME;
+    ctx.beginPath();
+    ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
   }
 
   private pointerDown(event: PointerEvent): void {
@@ -151,6 +166,8 @@ export class CanvasView {
     if (vertex) {
       vertex.selected = true;
       this.dragging = vertex;
+      this.dragStart = point;
+      this.didDrag = false;
       this.canvas.setPointerCapture(event.pointerId);
       this.onSelect(vertex.id);
     } else {
@@ -162,15 +179,25 @@ export class CanvasView {
   private pointerMove(event: PointerEvent): void {
     if (!this.dragging) return;
     const point = this.eventPoint(event);
+    if (!this.didDrag && this.dragStart && Math.hypot(point.x - this.dragStart.x, point.y - this.dragStart.y) < 3) {
+      return;
+    }
+    this.didDrag = true;
+    this.graph?.setVertexPinned(this.dragging.id, true);
     this.dragging.x = point.x;
     this.dragging.y = point.y;
-    this.dragging.params.x = point.x;
-    this.dragging.params.y = point.y;
+    this.graph?.syncVertexParams(this.dragging);
     this.onGraphChange();
   }
 
-  private pointerUp(): void {
+  private pointerUp(event?: PointerEvent): void {
+    if (event?.shiftKey && this.didDrag && this.graph && this.dragging) {
+      this.graph.setVertexPinned(this.dragging.id, false);
+      this.onGraphChange();
+    }
     this.dragging = undefined;
+    this.dragStart = undefined;
+    this.didDrag = false;
   }
 
   private eventPoint(event: PointerEvent): CanvasPoint {
