@@ -131,3 +131,24 @@ rev194 source に合わせて Web 実装の座標・描画・layout を調整。
 ## [2026-06-10 01:59] lint | Law params 補足後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 02:10] filing-back | unpin/disanchor 操作を確認
+
+alpha0.10 と rev194 の source から、unpin 相当の操作を確認し、[TypeScript + Web MVP](analyses/typescript-web-mvp.md) に追記。
+
+- alpha0.10 には `pythonScripts/menu/s_v_disanchored.py` の `make selected vertex dis-anchored` があるが、menu 登録はコメントアウト
+- rev194 では `RenderableVertex.setDisanchored()` と `MO_MoveVertex` の Shift release による anchor remove が残っている
+- Web 版では発見性のため selected vertex 用の `Unpin` button を追加する
+
+## [2026-06-10 02:12] implementation | selected vertex の Unpin button を追加
+
+`web/` に selected vertex の pin を外す操作を追加。
+
+- `CommandGateway.pinVertex()` / `unpinVertex()` を追加
+- toolbar に `Unpin` button を追加し、選択中 vertex が pinned の場合だけ有効化
+- `Unpin` 実行後に Pinned count と YAML preview を更新
+- Vitest に gateway 経由の pin/unpin test を追加
+
+## [2026-06-10 02:12] lint | Unpin button 追加後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。

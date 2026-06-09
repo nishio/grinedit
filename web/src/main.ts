@@ -29,6 +29,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <button id="run">Run</button>
       <button id="addVertex">Add Vertex</button>
       <button id="addEdge">Add Edge</button>
+      <button id="unpin" disabled>Unpin</button>
     </header>
     <main class="workspace">
       <section class="canvas-pane">
@@ -65,6 +66,7 @@ const view = new CanvasView(canvas, (id) => {
 
 const fixtureSelect = document.querySelector<HTMLSelectElement>("#fixture")!;
 const runButton = document.querySelector<HTMLButtonElement>("#run")!;
+const unpinButton = document.querySelector<HTMLButtonElement>("#unpin")!;
 
 document.querySelector<HTMLButtonElement>("#load")!.addEventListener("click", () => {
   currentFixture = fixtureSelect.value as FixtureName;
@@ -106,6 +108,12 @@ document.querySelector<HTMLButtonElement>("#addEdge")!.addEventListener("click",
   render();
 });
 
+unpinButton.addEventListener("click", () => {
+  if (!selectedId || !gateway.graph.vertices.has(selectedId)) return;
+  gateway.unpinVertex(selectedId);
+  render();
+});
+
 window.addEventListener("resize", () => view.draw());
 
 function start(): void {
@@ -134,6 +142,7 @@ function render(): void {
   text("#lawCount", String(summary.laws));
   text("#pinnedCount", String(summary.pinned));
   const selected = selectedId ? gateway.graph.all.get(selectedId) : undefined;
+  unpinButton.disabled = !(selectedId && gateway.graph.vertices.get(selectedId)?.pinned);
   text("#selectedDetails", selected ? JSON.stringify(selected.params, null, 2) : "none");
   document.querySelector<HTMLTextAreaElement>("#yamlPreview")!.value = exportYamlGraph(gateway.graph);
 }

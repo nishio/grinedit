@@ -56,6 +56,16 @@ export class CommandGateway {
     return this.modObject("Vertex", name, params);
   }
 
+  pinVertex(name: string): Params {
+    this.graph.setVertexPinned(name, true);
+    return this.getVertex(name);
+  }
+
+  unpinVertex(name: string): Params {
+    this.graph.setVertexPinned(name, false);
+    return this.getVertex(name);
+  }
+
   modEdge(name: string, params: Params): Params {
     return this.modObject("Edge", name, params);
   }

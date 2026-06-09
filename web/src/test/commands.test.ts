@@ -37,4 +37,16 @@ describe("CommandGateway", () => {
     expect(gateway.pause(true)).toBe(false);
     expect(gateway.rendering(false)).toBe(true);
   });
+
+  it("pins and unpins vertices through the gateway", () => {
+    const gateway = new CommandGateway(new GraphModel(false));
+    gateway.addVertex("BoxVertex", { id: "v1", pinned: true });
+
+    expect(gateway.graph.summary()).toMatchObject({ pinned: 1 });
+    expect(gateway.unpinVertex("v1")).not.toHaveProperty("pinned");
+    expect(gateway.graph.summary()).toMatchObject({ pinned: 0 });
+
+    expect(gateway.pinVertex("v1")).toMatchObject({ pinned: true });
+    expect(gateway.graph.summary()).toMatchObject({ pinned: 1 });
+  });
 });

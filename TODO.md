@@ -24,6 +24,7 @@
 - [x] sqr10 square grid sample を Web fixture に追加する
 - [x] ドラッグした頂点をデフォルトで pin 留めする
 - [x] original の viewport/render/layout 挙動に寄せる
+- [x] selected vertex の Unpin ボタンを追加する
 - [ ] YAML textarea からの import/edit を実装する
 - [ ] Canvas 操作の Playwright/Vitest browser test を追加する
 - [ ] Electron packaging の要否を再判断する
