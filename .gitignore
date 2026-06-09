@@ -3,4 +3,6 @@ lib/
 raw/
 alpha0.10-src/cachedir/
 .DS_Store
-
+web/node_modules/
+web/dist/
+web/.vite/

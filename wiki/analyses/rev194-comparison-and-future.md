@@ -49,7 +49,7 @@ Java 版は、オリジナル挙動を観察する参照実装として価値が
 
 ## WASM / Web 移植の方向
 
-WASM 移植は「Java bytecode をそのまま WASM に載せる」より、「グラフモデル、物理法則、CommonGateway 相当 API、plugin/保存形式を JS/TypeScript に再実装する」方が現実的。理由は GUI が SWT/AWT 混在であり、Jython スクリプト層も JVM 前提だから（[rev194 バイナリ](../sources/grinedit-bin-rev194.md)、[Jython](../concepts/jython.md)より）。
+WASM 移植は「Java bytecode をそのまま WASM に載せる」より、「グラフモデル、物理法則、CommonGateway 相当 API、plugin/保存形式を JS/TypeScript に再実装する」方が現実的。理由は GUI が SWT/AWT 混在であり、Jython スクリプト層も JVM 前提だから（[rev194 バイナリ](../sources/grinedit-bin-rev194.md)、[Jython](../concepts/jython.md)より）。この方針を [TypeScript + Web MVP](typescript-web-mvp.md) として具体化した。
 
 Electron 化または Web アプリ化では、Canvas/WebGL 上に renderer と layout loop を置き、YAML/JSON/Pickle のうち現代で扱いやすい YAML/JSON を移植対象にするのがよい。Pickle は Python/Jython 依存の歴史的互換機能として扱うのが無難。
 
@@ -70,3 +70,4 @@ Electron 化または Web アプリ化では、Canvas/WebGL 上に renderer と 
 - 2026-06-10: `nishio/grinedit` を public GitHub repository として作成し、初回コミット `0e679e5` を `main` に push。
 - 2026-06-10: standalone source zip は見つからなかったが、rev194 バイナリ内の `.svn/text-base` と class decompile から [rev194-recovered-src](../sources/rev194-recovered-src.md)を生成。`scripts/build-rev194-recovered.sh` で Java 19 コンパイル検証済み。
 - 2026-06-10: rev194 の現代 macOS 起動確認は中止。Java/SWT 版の延命は無理と判断し、以後は TypeScript/Web/Electron 移植の最小仕様抽出へ進める。
+- 2026-06-10: [TypeScript + Web MVP](typescript-web-mvp.md) を作成し、`web/` に初期実装を追加。

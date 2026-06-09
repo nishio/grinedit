@@ -11,4 +11,16 @@
 - [x] rev194 app jar の `.svn/text-base/*.java.svn-base` を derivation として抽出する → rev194-recovered-src/
 - [x] `BasicStrokeEdge`, `NewMouseHandler`, `NewMouseMediator` を decompile で補完する
 - [x] rev194 を macOS の現代 SWT で起動できるか試す → 中止。挙動観察が十分できておらず、Java/SWT 版の延命は無理と判断
-- [ ] TypeScript/Web/Electron 移植の最小仕様を切る
+- [x] TypeScript/Web/Electron 移植の最小仕様を切る → wiki/analyses/typescript-web-mvp.md
+
+## Web MVP
+
+- [x] TypeScript + Web core を実装する
+- [x] rev194 YAML fixture tests を追加する
+- [x] 最小 Canvas UI を実装する
+
+## Next Web
+
+- [ ] YAML textarea からの import/edit を実装する
+- [ ] Canvas 操作の Playwright/Vitest browser test を追加する
+- [ ] Electron packaging の要否を再判断する

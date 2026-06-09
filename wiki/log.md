@@ -59,3 +59,24 @@ standalone source zip は見つからなかったが、`grinedit-bin-rev194-2007
 ## [2026-06-10 00:39] decision | Java/SWT 版の延命中止
 
 rev194 を現代 macOS の SWT で起動して挙動観察するタスクは中止。挙動観察が十分できておらず、SWT/Jython 依存を延命する費用対効果が悪いため、Java 版は「読むための歴史的実装」として扱う。以後は [rev194-recovered-src](sources/rev194-recovered-src.md)から TypeScript/Web/Electron 移植の最小仕様を抽出する。
+
+## [2026-06-10 00:59] filing-back | TypeScript + Web MVP 仕様を作成
+
+Java/SWT 版延命を中止した判断に従い、TypeScript + Web を一次移植先にする [TypeScript + Web MVP](analyses/typescript-web-mvp.md) を作成。
+
+- Electron は後段の配布形態として扱う
+- MVP は graph model、YAML fixture、command API、layout step、Canvas UI に限定
+- Jython/XML-RPC/plugin jar loading/Pickle は MVP 外
+
+## [2026-06-10 01:11] implementation | TypeScript + Web MVP 初期実装
+
+[TypeScript + Web MVP](analyses/typescript-web-mvp.md) に従い、`web/` にブラウザ版の初期実装を追加。
+
+- Vite + TypeScript + Vitest の構成を追加
+- `GraphModel`, `CommandGateway`, YAML import/export, deterministic layout step を実装
+- rev194 YAML sample 3 件を fixture 化し、import/export と command/layout のテストを追加
+- Canvas UI で sample load、layout step/run、vertex/edge 追加、selection 表示、YAML preview を実装
+
+## [2026-06-10 01:12] lint | TypeScript + Web MVP 実装後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
