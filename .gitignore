@@ -1,0 +1,6 @@
+build/
+lib/
+raw/
+alpha0.10-src/cachedir/
+.DS_Store
+

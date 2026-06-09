@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: Fri Jun 09 21:19:34 2006\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ../menu\blodenSelection.py:19
+msgid "bloden selection"
+msgstr ""
+
+#: ../menu\edit.py:2
+msgid "&Edit"
+msgstr ""
+
+#: ../menu\selectWithCaption.py:8 ../menu\selectWithCaption.py:9
+msgid "Input keyword for search"
+msgstr ""
+
+#: ../menu\selectWithCaption.py:19
+msgid "select vertex with its caption"
+msgstr ""
+
+#: ..\initMenu.py:29
+msgid "File"
+msgstr ""
+
+#: ..\initMenu.py:33
+msgid "Load LegacyFormat Data"
+msgstr ""
+
+#: ..\initMenu.py:38
+msgid "Load PairedFormat Data"
+msgstr ""
+
+#: ..\initMenu.py:41
+msgid "Load from JSON"
+msgstr ""
+
+#: ..\initMenu.py:44
+msgid "Save as JSON"
+msgstr ""
+
+#: ..\initMenu.py:48
+msgid "Run Script"
+msgstr ""
+
+#: ..\initMenu.py:56
+msgid "Open Jython Console"
+msgstr ""
+
+#: ..\initMenu.py:58
+msgid "Load Background Image"
+msgstr ""
+
+#: ..\initMenu.py:59
+msgid "Capture"
+msgstr ""
+
+#: ..\initMenu.py:69 ..\initMenu.py:75
+msgid "set default spring strength"
+msgstr ""
+
+#: ..\initMenu.py:70
+msgid "Input the default spring strength."
+msgstr ""
+
+#: ..\initMenu.py:82
+msgid "Mouse[&L]"
+msgstr ""
+
+#: ..\initMenu.py:90
+msgid "Mouse[&R]"
+msgstr ""
+
+#: ..\initMenu.py:91 ..\initMouseMediator.py:9
+msgid "&Translation"
+msgstr ""
+
+#: ..\initMenu.py:91 ..\initMouseMediator.py:13 ..\initMouseMediator.py:16
+msgid "&Scaling"
+msgstr ""
+
+#: ..\initMouseMediator.py:10 ..\initMouseMediator.py:15
+msgid "&Move Vertex"
+msgstr ""
+
+#: ..\initMouseMediator.py:11
+msgid "&Move Vertex w/o anchor"
+msgstr ""
+
+#: ..\initMouseMediator.py:12
+msgid "Select &Range"
+msgstr ""
+

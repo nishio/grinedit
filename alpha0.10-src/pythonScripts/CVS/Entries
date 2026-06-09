@@ -1,0 +1,13 @@
+/.cvsignore/1.1/Thu May 19 14:22:27 2005/-kk/
+/SimpleCompleter.py/1.1/Mon Oct 10 20:19:00 2005/-kk/
+/adhocLoader.py/1.1/Thu May 19 14:22:27 2005/-kk/
+D/i18n////
+/init.py/1.6/Thu Jun  1 06:18:25 2006/-kk/
+/initMenu.py/1.4/Thu Jun  1 06:15:49 2006/-kk/
+/initMouseMediator.py/1.5/Thu Jun  1 09:22:48 2006/-kk/
+D/jythonconsole////
+/legacyLoader.py/1.4/Fri May 26 16:31:03 2006/-kk/
+D/menu////
+/pairedLoader.py/1.1/Sat Oct  8 09:51:22 2005/-kk/
+/start.py/1.1/Thu Mar  2 18:14:26 2006/-kk/
+D/test////
