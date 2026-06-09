@@ -10,5 +10,5 @@
 
 - [x] rev194 app jar の `.svn/text-base/*.java.svn-base` を derivation として抽出する → rev194-recovered-src/
 - [x] `BasicStrokeEdge`, `NewMouseHandler`, `NewMouseMediator` を decompile で補完する
-- [ ] rev194 を macOS の現代 SWT で起動できるか試す
+- [x] rev194 を macOS の現代 SWT で起動できるか試す → 中止。挙動観察が十分できておらず、Java/SWT 版の延命は無理と判断
 - [ ] TypeScript/Web/Electron 移植の最小仕様を切る

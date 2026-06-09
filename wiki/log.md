@@ -55,3 +55,7 @@ standalone source zip は見つからなかったが、`grinedit-bin-rev194-2007
 ## [2026-06-10 00:18] lint | rev194-recovered-src 追加後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 00:39] decision | Java/SWT 版の延命中止
+
+rev194 を現代 macOS の SWT で起動して挙動観察するタスクは中止。挙動観察が十分できておらず、SWT/Jython 依存を延命する費用対効果が悪いため、Java 版は「読むための歴史的実装」として扱う。以後は [rev194-recovered-src](sources/rev194-recovered-src.md)から TypeScript/Web/Electron 移植の最小仕様を抽出する。
