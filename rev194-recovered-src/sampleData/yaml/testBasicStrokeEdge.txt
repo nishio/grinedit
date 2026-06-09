@@ -1,0 +1,27 @@
+Vertex:
+  v0: {}
+  v1: {label: width=2}
+  v2: {label: width=4}
+  v3: {label: width=1.1}
+
+Edge:
+  e1: 
+    classname: BasicStrokeEdge
+    params:
+      v1: v0
+      v2: v1
+      width: 2
+
+  e2: 
+    classname: BasicStrokeEdge
+    params:
+      v1: v0
+      v2: v2
+      width: 4
+
+  e3: 
+    classname: BasicStrokeEdge
+    params: 
+      v1: v0
+      v2: v3
+      width: 1.1

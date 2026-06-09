@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: Fri Sep 01 18:57:46 2006\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ../menu\blodenSelection.py:19
+msgid "bloden selection"
+msgstr ""
+
+#: ../menu\edit.py:2
+msgid "&Edit"
+msgstr ""
+
+#: ../menu\selectWithCaption.py:8 ../menu\selectWithCaption.py:9
+msgid "Input keyword for search"
+msgstr ""
+
+#: ../menu\selectWithCaption.py:19
+msgid "select vertex with its caption"
+msgstr ""
+
+#: ..\initMenu.py:53
+msgid "File"
+msgstr ""
+
+#: ..\initMenu.py:57
+msgid "Load LegacyFormat Data"
+msgstr ""
+
+#: ..\initMenu.py:63
+msgid "Load PairedFormat Data"
+msgstr ""
+
+#: ..\initMenu.py:67
+msgid "Load from JSON"
+msgstr ""
+
+#: ..\initMenu.py:72
+msgid "Save as JSON"
+msgstr ""
+
+#: ..\initMenu.py:78
+msgid "Run Script"
+msgstr ""
+
+#: ..\initMenu.py:87
+msgid "Open Jython Console"
+msgstr ""
+
+#: ..\initMenu.py:91
+msgid "Load Background Image"
+msgstr ""
+
+#: ..\initMenu.py:95
+msgid "Capture"
+msgstr ""
+
+#: ..\initMenu.py:107 ..\initMenu.py:112
+msgid "set default spring strength"
+msgstr ""
+
+#: ..\initMenu.py:108
+msgid "Input the default spring strength."
+msgstr ""
+
+#: ..\initMenu.py:114
+msgid "make group selected vertex"
+msgstr ""
+
+#: ..\initMenu.py:120
+msgid "Mouse[&L]"
+msgstr ""
+
+#: ..\initMenu.py:128
+msgid "Mouse[&R]"
+msgstr ""
+
+#: ..\initMenu.py:129 ..\initMouseMediator.py:9
+msgid "&Translation"
+msgstr ""
+
+#: ..\initMenu.py:129 ..\initMouseMediator.py:12
+msgid "&Scaling"
+msgstr ""
+
+#: ..\initMouseMediator.py:10 ..\initMouseMediator.py:15
+msgid "&Move Vertex"
+msgstr ""
+
+#: ..\initMouseMediator.py:11
+msgid "Select &Range"
+msgstr ""
+
+#: ..\initMouseMediator.py:13 ..\initMouseMediator.py:16
+msgid "&Translate/Scale"
+msgstr ""
+

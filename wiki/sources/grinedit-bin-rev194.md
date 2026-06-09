@@ -47,9 +47,12 @@ rev194 は [alpha0.10 バイナリ](GRINEdit-alpha0.10-bin.md)の fat jar 形式
 - アプリ本体の Java ソース断片と Python/Jython スクリプトは配布物内に多く残っているため、rev194 のソース復元は現実的。
 - `BasicStrokeEdge.jar` と `MO_RedBackgroundWhenDoubleClicked.jar` は class のみで、別途 `javap` または decompiler が必要。
 
+## Updates
+
+- 2026-06-10: この一次資料から [rev194-recovered-src](rev194-recovered-src.md)を生成。Java 95 ファイル、Python/Jython 78 ファイルを復元し、Java 19 でコンパイル検証済み。
+
 ## Open Questions
 
 - rev194 を macOS の現代 SWT で起動できるか
 - rev187 と rev194 の差分は何か
 - SourceForge/SourceForge.jp 以外に rev194 以降のバイナリまたはソースが残っているか
-

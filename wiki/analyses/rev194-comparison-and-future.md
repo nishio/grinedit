@@ -5,6 +5,7 @@ sources:
   - alpha0.10-src.zip
   - GRINEdit-alpha0.10.zip
   - grinedit-bin-rev194-20070115173728.zip
+  - rev194-recovered-src/
   - raw/init.md
 ---
 
@@ -66,3 +67,4 @@ Electron 化または Web アプリ化では、Canvas/WebGL 上に renderer と 
 ## Updates
 
 - 2026-06-10: `nishio/grinedit` を public GitHub repository として作成し、初回コミット `0e679e5` を `main` に push。
+- 2026-06-10: standalone source zip は見つからなかったが、rev194 バイナリ内の `.svn/text-base` と class decompile から [rev194-recovered-src](../sources/rev194-recovered-src.md)を生成。`scripts/build-rev194-recovered.sh` で Java 19 コンパイル検証済み。

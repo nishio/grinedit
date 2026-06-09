@@ -1,0 +1,8 @@
+VERTEX
+3
+1	Hello
+2	GRINEdit
+NODE
+1	2
+2	3
+

@@ -1,0 +1,1 @@
+print "Hello! It's SamplePlugin_Hello!"

@@ -42,3 +42,16 @@ JAIST の SourceForge.jp ミラーから `grinedit-bin-rev194-20070115173728.zip
 ## [2026-06-10 00:04] lint | publish 反映後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 00:16] ingest | rev194 バイナリから復元ソースを生成
+
+standalone source zip は見つからなかったが、`grinedit-bin-rev194-20070115173728.zip` 内の `grinedit-app-alpha0.20.jar` に残っていた `.svn/text-base/*.java.svn-base` から [rev194-recovered-src](sources/rev194-recovered-src.md)を生成。
+
+- `scripts/extract-rev194-source.sh` を追加
+- Java 95 files、Python/Jython 78 files、total 201 files
+- `.java.svn-base` が無かった `BasicStrokeEdge`, `NewMouseHandler`, `NewMouseMediator` は CFR 0.152 で decompile
+- `scripts/build-rev194-recovered.sh` を追加し、Java 19 で 93 class files までコンパイルできることを確認
+
+## [2026-06-10 00:18] lint | rev194-recovered-src 追加後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
