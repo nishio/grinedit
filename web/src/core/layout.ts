@@ -2,19 +2,25 @@ import type { Edge, Vertex } from "./types";
 import { GraphModel } from "./graph";
 
 export interface LayoutOptions {
+  maxIter: number;
   springLength: number;
   springStrength: number;
-  repulsionStrength: number;
-  damping: number;
-  timeStep: number;
+  repulsionRadius: number;
+  repulsionK: number;
+  anchorTolerance: number;
+  anchorPixelTolerance: number;
+  viewportScale: number;
 }
 
 const DEFAULT_LAYOUT: LayoutOptions = {
-  springLength: 120,
-  springStrength: 0.012,
-  repulsionStrength: 2800,
-  damping: 0.82,
-  timeStep: 1
+  maxIter: 10,
+  springLength: 1.0,
+  springStrength: 0.1,
+  repulsionRadius: 3.0,
+  repulsionK: 0.02,
+  anchorTolerance: 9,
+  anchorPixelTolerance: 0.1,
+  viewportScale: 40.0
 };
 
 function edgeVertices(graph: GraphModel, edge: Edge): [Vertex, Vertex] | undefined {
@@ -24,59 +30,125 @@ function edgeVertices(graph: GraphModel, edge: Edge): [Vertex, Vertex] | undefin
 }
 
 export function layoutStep(graph: GraphModel, options: Partial<LayoutOptions> = {}): void {
-  const opts = { ...DEFAULT_LAYOUT, ...options };
-  const forces = new Map<string, { x: number; y: number }>();
-  for (const vertex of graph.vertices.values()) {
-    forces.set(vertex.id, { x: 0, y: 0 });
+  const opts = { ...DEFAULT_LAYOUT, ...graphLayoutOptions(graph), ...options };
+  const vertices = [...graph.vertices.values()];
+  const oldPositions = new Map(vertices.map((vertex) => [vertex.id, { x: vertex.x, y: vertex.y }]));
+  const anchorTargets = new Map(
+    vertices.filter((vertex) => vertex.pinned).map((vertex) => [vertex.id, { x: vertex.x, y: vertex.y }])
+  );
+
+  for (let iter = 0; iter < opts.maxIter; iter++) {
+    const dVel = new Map(vertices.map((vertex) => [vertex.id, { x: 0, y: 0 }]));
+    let isAllSatisfied = true;
+
+    if (iter === 0) {
+      applySpringEdge(graph, dVel, opts);
+      applyRepulsion(vertices, dVel, opts);
+      if (anchorTargets.size > 0) {
+        isAllSatisfied = false;
+      }
+    }
+
+    if (iter > 0 && iter < opts.anchorTolerance) {
+      for (const [id, target] of anchorTargets) {
+        const vertex = graph.vertices.get(id);
+        if (!vertex) continue;
+        const dx = target.x - vertex.x;
+        const dy = target.y - vertex.y;
+        if (Math.hypot(dx * opts.viewportScale, dy * opts.viewportScale) > opts.anchorPixelTolerance) {
+          dVel.get(id)!.x += dx;
+          dVel.get(id)!.y += dy;
+          isAllSatisfied = false;
+        }
+      }
+    }
+
+    for (const vertex of vertices) {
+      const velocity = dVel.get(vertex.id)!;
+      vertex.x += velocity.x;
+      vertex.y += velocity.y;
+    }
+
+    if (isAllSatisfied) {
+      break;
+    }
   }
 
+  for (const vertex of vertices) {
+    const oldPosition = oldPositions.get(vertex.id)!;
+    vertex.vx = vertex.x - oldPosition.x;
+    vertex.vy = vertex.y - oldPosition.y;
+    graph.syncVertexParams(vertex);
+  }
+}
+
+function graphLayoutOptions(graph: GraphModel): Partial<LayoutOptions> {
+  const spring = graph.laws.get("PL_SpringEdge")?.params;
+  const repulsion = graph.laws.get("PL_Repulsion")?.params;
+  return {
+    springLength: numberParam(spring?.defaultNormalLength, DEFAULT_LAYOUT.springLength),
+    springStrength: numberParam(spring?.defaultSpringStrength, DEFAULT_LAYOUT.springStrength),
+    repulsionK: numberParam(repulsion?.repulsionK, DEFAULT_LAYOUT.repulsionK),
+    repulsionRadius: numberParam(repulsion?.repulsionRadius, DEFAULT_LAYOUT.repulsionRadius)
+  };
+}
+
+function numberParam(value: unknown, fallback: number): number {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function applySpringEdge(
+  graph: GraphModel,
+  dVel: Map<string, { x: number; y: number }>,
+  opts: LayoutOptions
+): void {
   for (const edge of graph.edges.values()) {
     const pair = edgeVertices(graph, edge);
     if (!pair) continue;
     const [a, b] = pair;
     const dx = b.x - a.x;
     const dy = b.y - a.y;
-    const distance = Math.hypot(dx, dy) || 1;
-    const force = (distance - opts.springLength) * opts.springStrength;
-    const fx = (dx / distance) * force;
-    const fy = (dy / distance) * force;
-    forces.get(a.id)!.x += fx;
-    forces.get(a.id)!.y += fy;
-    forces.get(b.id)!.x -= fx;
-    forces.get(b.id)!.y -= fy;
+    const distance = Math.hypot(dx, dy);
+    const nx = distance === 0 ? 1 : dx / distance;
+    const ny = distance === 0 ? 0 : dy / distance;
+    const power = (opts.springLength - distance) * opts.springStrength;
+    const fx = nx * power;
+    const fy = ny * power;
+    dVel.get(b.id)!.x += fx;
+    dVel.get(b.id)!.y += fy;
+    dVel.get(a.id)!.x -= fx;
+    dVel.get(a.id)!.y -= fy;
   }
+}
 
-  const vertices = [...graph.vertices.values()];
+function applyRepulsion(
+  vertices: Vertex[],
+  dVel: Map<string, { x: number; y: number }>,
+  opts: LayoutOptions
+): void {
+  const radiusSq = opts.repulsionRadius * opts.repulsionRadius;
   for (let i = 0; i < vertices.length; i++) {
-    for (let j = i + 1; j < vertices.length; j++) {
-      const a = vertices[i];
+    const a = vertices[i];
+    for (let j = 0; j < i; j++) {
       const b = vertices[j];
       const dx = b.x - a.x;
       const dy = b.y - a.y;
-      const distanceSq = Math.max(dx * dx + dy * dy, 25);
+      if (dx > opts.repulsionRadius || dx < -opts.repulsionRadius) continue;
+      if (dy > opts.repulsionRadius || dy < -opts.repulsionRadius) continue;
+      const distanceSq = dx * dx + dy * dy;
+      const normalizedDistance = distanceSq / radiusSq;
+      if (normalizedDistance >= 1) continue;
       const distance = Math.sqrt(distanceSq);
-      const force = opts.repulsionStrength / distanceSq;
-      const fx = (dx / distance) * force;
-      const fy = (dy / distance) * force;
-      forces.get(a.id)!.x -= fx;
-      forces.get(a.id)!.y -= fy;
-      forces.get(b.id)!.x += fx;
-      forces.get(b.id)!.y += fy;
+      const nx = distanceSq === 0 ? 1 : dx / distance;
+      const ny = distanceSq === 0 ? 0 : dy / distance;
+      const power = opts.repulsionK * (1.0 - normalizedDistance);
+      const fx = nx * power;
+      const fy = ny * power;
+      dVel.get(b.id)!.x += fx;
+      dVel.get(b.id)!.y += fy;
+      dVel.get(a.id)!.x -= fx;
+      dVel.get(a.id)!.y -= fy;
     }
-  }
-
-  for (const vertex of graph.vertices.values()) {
-    if (vertex.pinned) {
-      vertex.vx = 0;
-      vertex.vy = 0;
-      graph.syncVertexParams(vertex);
-      continue;
-    }
-    const force = forces.get(vertex.id)!;
-    vertex.vx = (vertex.vx + force.x * opts.timeStep) * opts.damping;
-    vertex.vy = (vertex.vy + force.y * opts.timeStep) * opts.damping;
-    vertex.x += vertex.vx * opts.timeStep;
-    vertex.y += vertex.vy * opts.timeStep;
-    graph.syncVertexParams(vertex);
   }
 }

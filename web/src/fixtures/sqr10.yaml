@@ -1,104 +1,104 @@
 Vertex:
-  v1: {label: "1", x: -216, y: -216}
-  v2: {label: "2", x: -168, y: -216}
-  v3: {label: "3", x: -120, y: -216}
-  v4: {label: "4", x: -72, y: -216}
-  v5: {label: "5", x: -24, y: -216}
-  v6: {label: "6", x: 24, y: -216}
-  v7: {label: "7", x: 72, y: -216}
-  v8: {label: "8", x: 120, y: -216}
-  v9: {label: "9", x: 168, y: -216}
-  v10: {label: "10", x: 216, y: -216}
-  v11: {label: "11", x: -216, y: -168}
-  v12: {label: "12", x: -168, y: -168}
-  v13: {label: "13", x: -120, y: -168}
-  v14: {label: "14", x: -72, y: -168}
-  v15: {label: "15", x: -24, y: -168}
-  v16: {label: "16", x: 24, y: -168}
-  v17: {label: "17", x: 72, y: -168}
-  v18: {label: "18", x: 120, y: -168}
-  v19: {label: "19", x: 168, y: -168}
-  v20: {label: "20", x: 216, y: -168}
-  v21: {label: "21", x: -216, y: -120}
-  v22: {label: "22", x: -168, y: -120}
-  v23: {label: "23", x: -120, y: -120}
-  v24: {label: "24", x: -72, y: -120}
-  v25: {label: "25", x: -24, y: -120}
-  v26: {label: "26", x: 24, y: -120}
-  v27: {label: "27", x: 72, y: -120}
-  v28: {label: "28", x: 120, y: -120}
-  v29: {label: "29", x: 168, y: -120}
-  v30: {label: "30", x: 216, y: -120}
-  v31: {label: "31", x: -216, y: -72}
-  v32: {label: "32", x: -168, y: -72}
-  v33: {label: "33", x: -120, y: -72}
-  v34: {label: "34", x: -72, y: -72}
-  v35: {label: "35", x: -24, y: -72}
-  v36: {label: "36", x: 24, y: -72}
-  v37: {label: "37", x: 72, y: -72}
-  v38: {label: "38", x: 120, y: -72}
-  v39: {label: "39", x: 168, y: -72}
-  v40: {label: "40", x: 216, y: -72}
-  v41: {label: "41", x: -216, y: -24}
-  v42: {label: "42", x: -168, y: -24}
-  v43: {label: "43", x: -120, y: -24}
-  v44: {label: "44", x: -72, y: -24}
-  v45: {label: "45", x: -24, y: -24}
-  v46: {label: "46", x: 24, y: -24}
-  v47: {label: "47", x: 72, y: -24}
-  v48: {label: "48", x: 120, y: -24}
-  v49: {label: "49", x: 168, y: -24}
-  v50: {label: "50", x: 216, y: -24}
-  v51: {label: "51", x: -216, y: 24}
-  v52: {label: "52", x: -168, y: 24}
-  v53: {label: "53", x: -120, y: 24}
-  v54: {label: "54", x: -72, y: 24}
-  v55: {label: "55", x: -24, y: 24}
-  v56: {label: "56", x: 24, y: 24}
-  v57: {label: "57", x: 72, y: 24}
-  v58: {label: "58", x: 120, y: 24}
-  v59: {label: "59", x: 168, y: 24}
-  v60: {label: "60", x: 216, y: 24}
-  v61: {label: "61", x: -216, y: 72}
-  v62: {label: "62", x: -168, y: 72}
-  v63: {label: "63", x: -120, y: 72}
-  v64: {label: "64", x: -72, y: 72}
-  v65: {label: "65", x: -24, y: 72}
-  v66: {label: "66", x: 24, y: 72}
-  v67: {label: "67", x: 72, y: 72}
-  v68: {label: "68", x: 120, y: 72}
-  v69: {label: "69", x: 168, y: 72}
-  v70: {label: "70", x: 216, y: 72}
-  v71: {label: "71", x: -216, y: 120}
-  v72: {label: "72", x: -168, y: 120}
-  v73: {label: "73", x: -120, y: 120}
-  v74: {label: "74", x: -72, y: 120}
-  v75: {label: "75", x: -24, y: 120}
-  v76: {label: "76", x: 24, y: 120}
-  v77: {label: "77", x: 72, y: 120}
-  v78: {label: "78", x: 120, y: 120}
-  v79: {label: "79", x: 168, y: 120}
-  v80: {label: "80", x: 216, y: 120}
-  v81: {label: "81", x: -216, y: 168}
-  v82: {label: "82", x: -168, y: 168}
-  v83: {label: "83", x: -120, y: 168}
-  v84: {label: "84", x: -72, y: 168}
-  v85: {label: "85", x: -24, y: 168}
-  v86: {label: "86", x: 24, y: 168}
-  v87: {label: "87", x: 72, y: 168}
-  v88: {label: "88", x: 120, y: 168}
-  v89: {label: "89", x: 168, y: 168}
-  v90: {label: "90", x: 216, y: 168}
-  v91: {label: "91", x: -216, y: 216}
-  v92: {label: "92", x: -168, y: 216}
-  v93: {label: "93", x: -120, y: 216}
-  v94: {label: "94", x: -72, y: 216}
-  v95: {label: "95", x: -24, y: 216}
-  v96: {label: "96", x: 24, y: 216}
-  v97: {label: "97", x: 72, y: 216}
-  v98: {label: "98", x: 120, y: 216}
-  v99: {label: "99", x: 168, y: 216}
-  v100: {label: "100", x: 216, y: 216}
+  v1: {label: "1", position: [-4.5, -4.5]}
+  v2: {label: "2", position: [-3.5, -4.5]}
+  v3: {label: "3", position: [-2.5, -4.5]}
+  v4: {label: "4", position: [-1.5, -4.5]}
+  v5: {label: "5", position: [-0.5, -4.5]}
+  v6: {label: "6", position: [0.5, -4.5]}
+  v7: {label: "7", position: [1.5, -4.5]}
+  v8: {label: "8", position: [2.5, -4.5]}
+  v9: {label: "9", position: [3.5, -4.5]}
+  v10: {label: "10", position: [4.5, -4.5]}
+  v11: {label: "11", position: [-4.5, -3.5]}
+  v12: {label: "12", position: [-3.5, -3.5]}
+  v13: {label: "13", position: [-2.5, -3.5]}
+  v14: {label: "14", position: [-1.5, -3.5]}
+  v15: {label: "15", position: [-0.5, -3.5]}
+  v16: {label: "16", position: [0.5, -3.5]}
+  v17: {label: "17", position: [1.5, -3.5]}
+  v18: {label: "18", position: [2.5, -3.5]}
+  v19: {label: "19", position: [3.5, -3.5]}
+  v20: {label: "20", position: [4.5, -3.5]}
+  v21: {label: "21", position: [-4.5, -2.5]}
+  v22: {label: "22", position: [-3.5, -2.5]}
+  v23: {label: "23", position: [-2.5, -2.5]}
+  v24: {label: "24", position: [-1.5, -2.5]}
+  v25: {label: "25", position: [-0.5, -2.5]}
+  v26: {label: "26", position: [0.5, -2.5]}
+  v27: {label: "27", position: [1.5, -2.5]}
+  v28: {label: "28", position: [2.5, -2.5]}
+  v29: {label: "29", position: [3.5, -2.5]}
+  v30: {label: "30", position: [4.5, -2.5]}
+  v31: {label: "31", position: [-4.5, -1.5]}
+  v32: {label: "32", position: [-3.5, -1.5]}
+  v33: {label: "33", position: [-2.5, -1.5]}
+  v34: {label: "34", position: [-1.5, -1.5]}
+  v35: {label: "35", position: [-0.5, -1.5]}
+  v36: {label: "36", position: [0.5, -1.5]}
+  v37: {label: "37", position: [1.5, -1.5]}
+  v38: {label: "38", position: [2.5, -1.5]}
+  v39: {label: "39", position: [3.5, -1.5]}
+  v40: {label: "40", position: [4.5, -1.5]}
+  v41: {label: "41", position: [-4.5, -0.5]}
+  v42: {label: "42", position: [-3.5, -0.5]}
+  v43: {label: "43", position: [-2.5, -0.5]}
+  v44: {label: "44", position: [-1.5, -0.5]}
+  v45: {label: "45", position: [-0.5, -0.5]}
+  v46: {label: "46", position: [0.5, -0.5]}
+  v47: {label: "47", position: [1.5, -0.5]}
+  v48: {label: "48", position: [2.5, -0.5]}
+  v49: {label: "49", position: [3.5, -0.5]}
+  v50: {label: "50", position: [4.5, -0.5]}
+  v51: {label: "51", position: [-4.5, 0.5]}
+  v52: {label: "52", position: [-3.5, 0.5]}
+  v53: {label: "53", position: [-2.5, 0.5]}
+  v54: {label: "54", position: [-1.5, 0.5]}
+  v55: {label: "55", position: [-0.5, 0.5]}
+  v56: {label: "56", position: [0.5, 0.5]}
+  v57: {label: "57", position: [1.5, 0.5]}
+  v58: {label: "58", position: [2.5, 0.5]}
+  v59: {label: "59", position: [3.5, 0.5]}
+  v60: {label: "60", position: [4.5, 0.5]}
+  v61: {label: "61", position: [-4.5, 1.5]}
+  v62: {label: "62", position: [-3.5, 1.5]}
+  v63: {label: "63", position: [-2.5, 1.5]}
+  v64: {label: "64", position: [-1.5, 1.5]}
+  v65: {label: "65", position: [-0.5, 1.5]}
+  v66: {label: "66", position: [0.5, 1.5]}
+  v67: {label: "67", position: [1.5, 1.5]}
+  v68: {label: "68", position: [2.5, 1.5]}
+  v69: {label: "69", position: [3.5, 1.5]}
+  v70: {label: "70", position: [4.5, 1.5]}
+  v71: {label: "71", position: [-4.5, 2.5]}
+  v72: {label: "72", position: [-3.5, 2.5]}
+  v73: {label: "73", position: [-2.5, 2.5]}
+  v74: {label: "74", position: [-1.5, 2.5]}
+  v75: {label: "75", position: [-0.5, 2.5]}
+  v76: {label: "76", position: [0.5, 2.5]}
+  v77: {label: "77", position: [1.5, 2.5]}
+  v78: {label: "78", position: [2.5, 2.5]}
+  v79: {label: "79", position: [3.5, 2.5]}
+  v80: {label: "80", position: [4.5, 2.5]}
+  v81: {label: "81", position: [-4.5, 3.5]}
+  v82: {label: "82", position: [-3.5, 3.5]}
+  v83: {label: "83", position: [-2.5, 3.5]}
+  v84: {label: "84", position: [-1.5, 3.5]}
+  v85: {label: "85", position: [-0.5, 3.5]}
+  v86: {label: "86", position: [0.5, 3.5]}
+  v87: {label: "87", position: [1.5, 3.5]}
+  v88: {label: "88", position: [2.5, 3.5]}
+  v89: {label: "89", position: [3.5, 3.5]}
+  v90: {label: "90", position: [4.5, 3.5]}
+  v91: {label: "91", position: [-4.5, 4.5]}
+  v92: {label: "92", position: [-3.5, 4.5]}
+  v93: {label: "93", position: [-2.5, 4.5]}
+  v94: {label: "94", position: [-1.5, 4.5]}
+  v95: {label: "95", position: [-0.5, 4.5]}
+  v96: {label: "96", position: [0.5, 4.5]}
+  v97: {label: "97", position: [1.5, 4.5]}
+  v98: {label: "98", position: [2.5, 4.5]}
+  v99: {label: "99", position: [3.5, 4.5]}
+  v100: {label: "100", position: [4.5, 4.5]}
 Edge:
   e1: [v1, v2]
   e2: [v1, v11]
@@ -280,3 +280,13 @@ Edge:
   e178: [v80, v90]
   e179: [v99, v100]
   e180: [v90, v100]
+Law:
+  PL_SpringEdge:
+    classname: PL_SpringEdge
+    params: {id: PL_SpringEdge, defaultNormalLength: 1.0, defaultSpringStrength: 0.25}
+  PL_Repulsion:
+    classname: PL_Repulsion
+    params: {id: PL_Repulsion, repulsionK: 0.02, repulsionRadius: 3.0}
+  PL_Anchor:
+    classname: PL_Anchor
+    params: {id: PL_Anchor}

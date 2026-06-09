@@ -86,7 +86,7 @@ button:hover {
 .canvas-pane {
   min-width: 0;
   min-height: 0;
-  background: #fbfcfb;
+  background: #fff;
 }
 
 #graphCanvas {

@@ -101,3 +101,33 @@ Java/SWT 版延命を中止した判断に従い、TypeScript + Web を一次移
 ## [2026-06-10 01:33] lint | sqr10 sample と drag pin UX 実装後の wiki lint
 
 `python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 01:49] filing-back | original viewport/render/layout 挙動を確認
+
+[TypeScript + Web MVP](analyses/typescript-web-mvp.md) に、rev194 source を読んで確認した original 挙動の移植ルールを追記。
+
+- `ViewportTransformer` は graph 座標と screen 座標を分け、rev194 では scale 40.0 を使う
+- `DefaultRenderer` は screenPos 更新後に edge、vertex の順で描画する
+- `BoxVertex`, `CircleVertex`, `LinearEdge`, `TriangleEdge`, `BasicStrokeEdge` の寸法・色を source から確認
+- `SimpleLayout`, `PL_SpringEdge`, `PL_Repulsion`, `PL_Anchor` の定数と反復方法を確認
+- `MassPoint.getParams()` は `position` と `velocity` を返すため、Web export も `position/velocity` を canonical に寄せる
+
+## [2026-06-10 01:56] implementation | viewport/render/layout を original 挙動へ寄せる
+
+rev194 source に合わせて Web 実装の座標・描画・layout を調整。
+
+- TS 内部の `x/y` を graph 座標として扱い、Canvas では viewport scale 40 で screen 座標へ変換
+- `BoxVertex` は margin 3px の矩形、`CircleVertex` は diameter 15px、色は AWT `ColorHolder` ベースへ変更
+- `TriangleEdge` は line+arrow ではなく original と同じ三角形 polygon として描画
+- layout を rev194 `SimpleLayout`/`PL_SpringEdge`/`PL_Repulsion`/`PL_Anchor` の定数と反復方式へ変更
+- layout が `PL_SpringEdge` / `PL_Repulsion` の Law params を読むように変更し、`sqr10` に legacy loader 相当の `defaultSpringStrength: 0.25` を追加
+- YAML export の canonical params を `position` / `velocity` へ変更し、`x/y` は互換 import として残す
+- `sqr10` fixture は pixel ではなく graph 座標 `-4.5..4.5` の `position` に更新
+
+## [2026-06-10 01:57] lint | original viewport/render/layout 反映後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。
+
+## [2026-06-10 01:59] lint | Law params 補足後の wiki lint
+
+`python3 scripts/lint_wiki.py` を実行し、重複ページID 0、孤立ページ 0、壊れたリンク 0、index 未登録 0、frontmatter 不備 0 を確認。

@@ -79,7 +79,7 @@ export function exportYamlGraph(graph: GraphModel): string {
 
   for (const vertex of graph.vertices.values()) {
     graph.syncVertexParams(vertex);
-    const params: Params = { ...vertex.params, label: vertex.label, x: vertex.x, y: vertex.y };
+    const params: Params = { ...vertex.params, label: vertex.label };
     if (!vertex.pinned) {
       delete params.pinned;
     }

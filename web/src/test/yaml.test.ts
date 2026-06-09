@@ -25,8 +25,9 @@ describe("rev194 YAML fixtures", () => {
   it("imports the sqr10 square-grid fixture", () => {
     const graph = importYamlGraph(fixtures.sqr10);
     expect(graph.summary()).toMatchObject({ vertices: 100, edges: 180, laws: 3 });
-    expect(graph.vertices.get("v1")).toMatchObject({ label: "1", x: -216, y: -216 });
-    expect(graph.vertices.get("v100")).toMatchObject({ label: "100", x: 216, y: 216 });
+    expect(graph.vertices.get("v1")).toMatchObject({ label: "1", x: -4.5, y: -4.5 });
+    expect(graph.vertices.get("v100")).toMatchObject({ label: "100", x: 4.5, y: 4.5 });
+    expect(graph.laws.get("PL_SpringEdge")?.params.defaultSpringStrength).toBe(0.25);
   });
 
   it("round-trips a normalized export", () => {
@@ -46,5 +47,6 @@ Edge: {}
 `);
     expect(graph.vertices.get("v1")).toMatchObject({ pinned: true, x: 12, y: 34 });
     expect(exportYamlGraph(graph)).toContain("pinned: true");
+    expect(exportYamlGraph(graph)).toContain("position:");
   });
 });

@@ -13,11 +13,11 @@ function hashId(id: string): number {
 
 function pointFromId(id: string): { x: number; y: number } {
   const hash = hashId(id);
-  const angle = (hash % 360) * (Math.PI / 180);
-  const radius = 90 + (hash % 70);
+  const xUnit = (hash & 0xffff) / 0xffff;
+  const yUnit = ((hash >>> 16) & 0xffff) / 0xffff;
   return {
-    x: Math.round(Math.cos(angle) * radius),
-    y: Math.round(Math.sin(angle) * radius)
+    x: xUnit - 0.5,
+    y: yUnit - 0.5
   };
 }
 
@@ -28,7 +28,7 @@ function asNumber(value: unknown, fallback: number): number {
 
 function asBoolean(value: unknown, fallback = false): boolean {
   if (typeof value === "boolean") return value;
-  if (typeof value === "string") return value === "true";
+  if (typeof value === "string") return value.toLowerCase() === "true";
   return fallback;
 }
 
@@ -49,6 +49,8 @@ function anchoredPoint(value: unknown): { x: number; y: number } | undefined {
   }
   return undefined;
 }
+
+const vectorPoint = anchoredPoint;
 
 export class GraphModel {
   readonly all = new Map<string, GraphObject>();
@@ -108,20 +110,23 @@ export class GraphModel {
   addVertex(classname = "BoxVertex", params: Params = {}): string {
     const id = String(params.id ?? this.nextId("vertex"));
     const position = pointFromId(id);
+    const paramPosition = vectorPoint(params.position);
+    const paramVelocity = vectorPoint(params.velocity);
     const anchored = anchoredPoint(params.anchored);
     const pinned = anchored ? true : asBoolean(params.pinned);
     const vertex: Vertex = {
       id,
       classname,
       label: String(params.label ?? ""),
-      x: asNumber(params.x ?? params.left, anchored?.x ?? position.x),
-      y: asNumber(params.y ?? params.top, anchored?.y ?? position.y),
-      vx: 0,
-      vy: 0,
+      x: asNumber(params.x ?? params.left, paramPosition?.x ?? anchored?.x ?? position.x),
+      y: asNumber(params.y ?? params.top, paramPosition?.y ?? anchored?.y ?? position.y),
+      vx: paramVelocity?.x ?? 0,
+      vy: paramVelocity?.y ?? 0,
       pinned,
       selected: false,
-      params: { ...params, id, pinned }
+      params: { ...params, id }
     };
+    this.syncVertexParams(vertex);
     this.vertices.set(id, vertex);
     this.all.set(id, vertex);
     return id;
@@ -187,6 +192,20 @@ export class GraphModel {
     if (dictName === "Vertex") {
       const vertex = object as Vertex;
       if (params.label !== undefined) vertex.label = String(params.label);
+      if (params.position !== undefined) {
+        const point = vectorPoint(params.position);
+        if (point) {
+          vertex.x = point.x;
+          vertex.y = point.y;
+        }
+      }
+      if (params.velocity !== undefined) {
+        const velocity = vectorPoint(params.velocity);
+        if (velocity) {
+          vertex.vx = velocity.x;
+          vertex.vy = velocity.y;
+        }
+      }
       if (params.x !== undefined) vertex.x = asNumber(params.x, vertex.x);
       if (params.y !== undefined) vertex.y = asNumber(params.y, vertex.y);
       if (params.anchored !== undefined) {
@@ -236,9 +255,18 @@ export class GraphModel {
   }
 
   syncVertexParams(vertex: Vertex): void {
-    vertex.params.x = vertex.x;
-    vertex.params.y = vertex.y;
-    vertex.params.pinned = vertex.pinned;
+    delete vertex.params.x;
+    delete vertex.params.y;
+    delete vertex.params.left;
+    delete vertex.params.top;
+    delete vertex.params.anchored;
+    vertex.params.position = [vertex.x, vertex.y];
+    vertex.params.velocity = [vertex.vx, vertex.vy];
+    if (vertex.pinned) {
+      vertex.params.pinned = true;
+    } else {
+      delete vertex.params.pinned;
+    }
   }
 
   private nextId(prefix: string): string {

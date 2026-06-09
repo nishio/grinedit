@@ -13,7 +13,7 @@ describe("CommandGateway", () => {
     expect(gateway.getObjects("Vertex").v1.label).toBe("A");
 
     gateway.modVertex("v1", { label: "A1", x: 10 });
-    expect(gateway.getVertex("v1")).toMatchObject({ label: "A1", x: 10 });
+    expect(gateway.getVertex("v1")).toMatchObject({ label: "A1", position: [10, 0] });
 
     gateway.delEdge("e1");
     expect(gateway.graph.summary()).toMatchObject({ vertices: 2, edges: 0, all: 2 });
